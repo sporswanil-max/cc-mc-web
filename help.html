@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astra MC - Help Center</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body { background-color: #fafafa; }
+        .help-hero { max-width: 900px; margin: 140px auto 40px auto; text-align: center; padding: 0 24px; }
+        .help-hero h1 { font-size: 2.8rem; font-weight: 700; color: #252627; letter-spacing: -0.5px; margin-bottom: 15px; }
+        .search-container { position: relative; max-width: 550px; margin: 25px auto 0 auto; }
+        .search-container input { width: 100%; height: 54px; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 14px; padding: 0 20px 0 50px; font-size: 1rem; color: #252627; outline: none; box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+        .search-container input:focus { border-color: #252627; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #a1a1a6; font-size: 1.1rem; }
+        .help-tabs-nav { display: flex; justify-content: center; gap: 15px; margin: 40px auto; max-width: 600px; padding: 0 20px; }
+        .tab-btn { background: #ffffff; border: 1px solid rgba(0,0,0,0.06); padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; color: #6e7075; transition: all 0.25s ease; cursor: pointer; }
+        .tab-btn.active, .tab-btn:hover { background: #252627; color: #ffffff; border-color: #252627; }
+        .help-tab-content { display: none; max-width: 900px; margin: 0 auto; padding: 0 24px; animation: fadeInTab 0.4s ease forwards; }
+        .help-tab-content.active { display: block; }
+        @keyframes fadeInTab { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .faq-item { background: #ffffff; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+        .faq-trigger { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #252627; cursor: none !important; transition: background 0.2s ease; }
+        .faq-trigger:hover { background: #f7f7f9; }
+        .faq-trigger i { transition: transform 0.3s ease; color: #a1a1a6; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); background: #fdfdfd; }
+        .faq-content-inner { padding: 20px; color: #6e7075; font-size: 0.95rem; line-height: 1.6; border-top: 1px solid rgba(0,0,0,0.02); }
+        .faq-item.open .faq-trigger i { transform: rotate(180deg); }
+        .form-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.02); max-width: 650px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #252627; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; background: #f7f7f9; border: 1px solid rgba(0,0,0,0.05); border-radius: 10px; padding: 12px 16px; font-size: 0.95rem; color: #252627; outline: none; transition: all 0.2s ease; }
+        .form-submit-btn { background: #252627; color: #ffffff; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; transition: background 0.2s ease; width: 100%; margin-top: 10px; cursor: pointer; }
+        .toast-notification { position: fixed; bottom: 30px; right: 30px; background: #252627; color: white; padding: 16px 24px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; box-shadow: 0 15px 35px rgba(0,0,0,0.15); z-index: 100001; transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .toast-notification.show { transform: translateY(0); opacity: 1; }
+        @media (max-width: 768px) { .help-hero h1 { font-size: 2rem; } .help-tabs-nav { flex-direction: column; gap: 10px; } .form-card { padding: 24px; } }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="skeleton-container">
+            <div class="skeleton-nav">
+                <div class="skeleton-element skeleton-logo"></div>
+                <div class="skeleton-nav-links">
+                    <div class="skeleton-element skeleton-link"></div>
+                    <div class="skeleton-element skeleton-link"></div>
+                </div>
+            </div>
+            <div class="preloader-branding">
+                <strong>ASTRA</strong>
+                <span class="preloader-sub">LOADING SUITE</span>
+                <p id="preloader-fact">Resolving Matrices...</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="global-navbar"></nav>
+
+    <header class="help-hero">
+        <h1>Astra Operations Desk</h1>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="help-search" placeholder="Search parameters...">
+        </div>
+    </header>
+
+    <div class="help-tabs-nav">
+        <button class="tab-btn active" data-tab="kb"><i class="fas fa-book-open"></i> Matrix Docs</button>
+        <button class="tab-btn" data-tab="bug"><i class="fas fa-bug"></i> Trace Report</button>
+        <button class="tab-btn" data-tab="feedback"><i class="fas fa-comment-alt"></i> Module Feedback</button>
+    </div>
+
+    <main>
+        <section class="help-tab-content active" id="tab-kb">
+            <div id="faq-wrapper">
+                <div class="faq-item" data-keywords="fps boost rendering lag">
+                    <div class="faq-trigger"><span>How do I achieve the maximum 3x FPS Boost configuration?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-content"><div class="faq-content-inner">Navigate to your inside HUD configuration engine panel...</div></div>
+                </div>
+            </div>
+            <div id="search-empty" style="display:none; text-align:center; padding:40px; color:#a1a1a6;">No matching parameters found.</div>
+        </section>
+
+        <section class="help-tab-content" id="tab-bug">
+            <div class="form-card">
+                <form id="bug-form">
+                    <div class="form-group"><label>Alias</label><input type="text" id="bug-username" required></div>
+                    <div class="form-group"><label>Subsystem</label><select id="bug-category"><option value="rendering">Rendering</option></select></div>
+                    <div class="form-group"><label>Log Breakdown</label><textarea id="bug-desc" rows="5" required></textarea></div>
+                    <button type="submit" class="form-submit-btn">Dispatch Report</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="help-tab-content" id="tab-feedback">
+            <div class="form-card">
+                <form id="feedback-form">
+                    <div class="form-group"><label>Secure Email</label><input type="email" id="feed-email" required></div>
+                    <div class="form-group"><label>Focus</label><select id="feed-type"><option value="hud">UI Customization</option></select></div>
+                    <div class="form-group"><label>Proposal</label><textarea id="feed-message" rows="5" required></textarea></div>
+                    <button type="submit" class="form-submit-btn">Log Proposal</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-notification" id="toast-note">System update packaged successfully.</div>
+
+    <div class="global-socials"></div>
+    <footer class="global-footer"></footer>
+
+    <script src="global.js"></script>
+</body>
+</html>
